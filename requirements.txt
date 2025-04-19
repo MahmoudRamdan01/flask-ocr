@@ -7,5 +7,6 @@ numpy==1.26.4
 gunicorn==23.0.0
 arabic-reshaper==3.0.0
 python-bidi==0.6.6
-python-dotenv==1.0.1  # لإدارة المتغيرات البيئية
-azure-storage-blob==12.19.1  # إذا كنت تستخدم Azure Blob Storage
+azure-storage-blob==12.19.1
+Pillow==11.1.0
+python-dotenv==1.0.1
