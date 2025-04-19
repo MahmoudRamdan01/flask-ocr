@@ -12,7 +12,7 @@ from azure.storage.blob import BlobServiceClient
 app = Flask(__name__)
 
 # Azure Blob Storage Configuration
-CONNECTION_STRING = "DefaultEndpointsProtocol=https;AccountName=carplatmodels123;AccountKey=f8Fe6VA3N+TcPbdXkRUxH6Pfz+Ynksz0Pu67TSLZeYbCxZcEX7owgkrWgffcaRYajtVSFgXg1UZ7+AStfJfl5Q==;EndpointSuffix=core.windows.net"
+CONNECTION_STRING = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
 CONTAINER_NAME = "models"
 BLOB_NAME = "yolo11m_car_plate_trained.pt"
 MODEL_PATH = "yolo11m_car_plate_trained.pt"
