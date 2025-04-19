@@ -3,6 +3,7 @@ import os
 import cv2
 from PIL import Image
 import numpy as np
+import tempfile
 import arabic_reshaper
 from bidi.algorithm import get_display
 from ultralytics import YOLO
@@ -10,7 +11,7 @@ from paddleocr import PaddleOCR
 
 app = Flask(__name__)
 
-YOLO_MODEL_PATH = "yolo11m_car_plate_trained.pt"
+YOLO_MODEL_PATH = os.path.join(os.getcwd(), "yolo11m_car_plate_trained.pt")
 yolo_model = YOLO(YOLO_MODEL_PATH)
 
 def crop_image_yolo(image_path):
@@ -54,14 +55,12 @@ def detect_text_with_paddleocr(cropped_image):
 
 @app.route('/ocr', methods=['POST'])
 def ocr_endpoint():
-
     if 'image' not in request.files:
         return jsonify({'error': 'No image provided'}), 400
 
     image_file = request.files['image']
-    temp_dir = "/tmp"
-    if not os.path.exists(temp_dir):
-        os.makedirs(temp_dir)
+    temp_dir = tempfile.gettempdir()  
+    os.makedirs(temp_dir, exist_ok=True)
     image_path = os.path.join(temp_dir, image_file.filename)
     image_file.save(image_path)
 
